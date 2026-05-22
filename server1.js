@@ -641,62 +641,136 @@ app.post(
        */
       const uploadedImages = [];
 
-      for (const file of req.files) {
+      // for (const file of req.files) {
 
-        console.log(
-          "Uploading:",
-          file.originalname
-        );
+      //   console.log(
+      //     "Uploading:",
+      //     file.originalname
+      //   );
 
-        const form =
-          new FormData();
+      //   const form =
+      //     new FormData();
 
-        form.append(
-          "file",
-          fs.createReadStream(
-            file.path
-          ),
-          file.originalname
-        );
+      //   form.append(
+      //     "file",
+      //     fs.createReadStream(
+      //       file.path
+      //     ),
+      //     file.originalname
+      //   );
 
-        const uploadResponse =
-          await axios.post(
-            process.env
-              .KORE_UPLOAD_URL,
+      //   const uploadResponse =
+      //     await axios.post(
+      //       process.env
+      //         .KORE_UPLOAD_URL,
 
-            form,
+      //       form,
 
-            {
-              headers:
-                form.getHeaders(),
-            }
-          );
+      //       {
+      //         headers:
+      //           form.getHeaders(),
+      //       }
+      //     );
 
-        console.log(
-          "Upload response:",
-          uploadResponse.data
-        );
+      //   console.log(
+      //     "Upload response:",
+      //     uploadResponse.data
+      //   );
 
-        const imageUrl =
-          uploadResponse.data.url ||
-          uploadResponse.data.file ||
-          uploadResponse.data.path ||
-          uploadResponse.data;
+      //   const imageUrl =
+      //     uploadResponse.data.url ||
+      //     uploadResponse.data.file ||
+      //     uploadResponse.data.path ||
+      //     uploadResponse.data;
 
-        if (!imageUrl) {
-          throw new Error(
-            `Image URL not received for ${file.originalname}`
-          );
-        }
+      //   if (!imageUrl) {
+      //     throw new Error(
+      //       `Image URL not received for ${file.originalname}`
+      //     );
+      //   }
 
-        uploadedImages.push({
-          fileName:
-            file.originalname,
+      //   uploadedImages.push({
+      //     fileName:
+      //       file.originalname,
 
-          imageUrl,
-        });
+      //     imageUrl,
+      //   });
+      // }
+for (let i = 0; i < req.files.length; i++) {
+
+  const file = req.files[i];
+
+  /**
+   * Create custom filename
+   */
+  const timestamp =
+    Date.now();
+
+  const extension =
+    file.originalname
+      .split(".")
+      .pop();
+
+  const newFileName =
+    `${timestamp}_${i + 1}.${extension}`;
+
+  console.log(
+    "Uploading as:",
+    newFileName
+  );
+
+  const form =
+    new FormData();
+
+  /**
+   * Upload using new filename
+   */
+  form.append(
+    "file",
+    fs.createReadStream(
+      file.path
+    ),
+    newFileName
+  );
+
+  const uploadResponse =
+    await axios.post(
+      process.env
+        .KORE_UPLOAD_URL,
+
+      form,
+
+      {
+        headers:
+          form.getHeaders(),
       }
+    );
 
+  console.log(
+    "Upload response:",
+    uploadResponse.data
+  );
+
+  const imageUrl =
+    uploadResponse.data.url ||
+    uploadResponse.data.file ||
+    uploadResponse.data.path ||
+    uploadResponse.data;
+
+  if (!imageUrl) {
+
+    throw new Error(
+      `Image URL not received for ${newFileName}`
+    );
+  }
+
+  uploadedImages.push({
+    fileName:
+      newFileName,
+
+    imageUrl,
+  });
+}
       console.log(
         "All images uploaded:",
         uploadedImages

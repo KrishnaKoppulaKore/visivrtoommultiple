@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Upload Document</title>
+
+    <title>Toom Image Upload</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -14,47 +16,87 @@
         }
 
         body {
+
             height: 100vh;
+
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #cc0000,
+                    #990000
+                );
+
+            padding: 20px;
         }
 
         .upload-container {
+
             width: 100%;
-            max-width: 420px;
+            max-width: 450px;
+
             background: #ffffff;
+
             padding: 40px 30px;
+
             border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.25);
+
             text-align: center;
         }
 
+        .logo {
+
+            width: 150px;
+
+            margin-bottom: 25px;
+        }
+
         .upload-container h2 {
+
             font-size: 28px;
-            color: #0f172a;
+
+            color: #111827;
+
             margin-bottom: 10px;
         }
 
         .upload-container p {
-            color: #64748b;
+
+            color: #6b7280;
+
             font-size: 14px;
+
             margin-bottom: 30px;
         }
 
         .file-upload {
-            border: 2px dashed #94a3b8;
+
+            border:
+                2px dashed #cc0000;
+
             border-radius: 14px;
+
             padding: 35px 20px;
+
             transition: 0.3s;
+
             cursor: pointer;
-            background: #f8fafc;
+
+            background: #fff5f5;
         }
 
         .file-upload:hover {
-            border-color: #2563eb;
-            background: #eff6ff;
+
+            border-color: #990000;
+
+            background: #ffe5e5;
         }
 
         .file-upload input {
@@ -62,58 +104,129 @@
         }
 
         .file-upload label {
+
             cursor: pointer;
-            color: #2563eb;
-            font-weight: 600;
+
+            color: #cc0000;
+
+            font-weight: 700;
+
             font-size: 16px;
         }
 
         .file-name {
-            margin-top: 15px;
+
+            margin-top: 18px;
+
             font-size: 14px;
-            color: #334155;
+
+            color: #374151;
+
+            line-height: 1.6;
+
+            max-height: 160px;
+
+            overflow-y: auto;
+
+            word-break: break-word;
         }
 
         button {
+
             width: 100%;
+
             margin-top: 25px;
+
             padding: 14px;
+
             border: none;
+
             border-radius: 12px;
-            background: #2563eb;
+
+            background: #cc0000;
+
             color: white;
+
             font-size: 16px;
+
             font-weight: bold;
+
             cursor: pointer;
+
             transition: 0.3s;
         }
 
         button:hover {
-            background: #1d4ed8;
+
+            background: #990000;
         }
+
+        .note {
+
+            margin-top: 15px;
+
+            font-size: 12px;
+
+            color: #6b7280;
+        }
+
     </style>
 </head>
+
 <body>
 
     <div class="upload-container">
-        <h2>Upload Image</h2>
-        <p>Please upload your image to continue</p>
 
-        <form action="/submit-form" method="POST" enctype="multipart/form-data">
+        <!-- Toom Logo -->
+        <img
+            src="https://demo.kore.ai/images/fileupload/fileupload/upload/toom9192cropped.jpg"
+            alt="Toom Logo"
+            class="logo"
+        />
+
+        <h2>Upload Plant Images</h2>
+
+        <p>
+            Please upload one or more plant images to continue
+        </p>
+
+        <form
+            action="/submit-form"
+            method="POST"
+            enctype="multipart/form-data"
+        >
 
             <!-- Hidden Fields -->
-            <input type="hidden" name="request_id" id="request_id">
+            <input
+                type="hidden"
+                name="request_id"
+                id="request_id"
+            >
 
-            <!-- Hidden values as space -->
-            <input type="hidden" name="name" value=" ">
-            <input type="hidden" name="age" value=" ">
-            <input type="hidden" name="problem" value=" ">
+            <input
+                type="hidden"
+                name="name"
+                value=" "
+            >
+
+            <input
+                type="hidden"
+                name="age"
+                value=" "
+            >
+
+            <input
+                type="hidden"
+                name="problem"
+                value=" "
+            >
 
             <!-- File Upload -->
             <div class="file-upload">
-                <input 
-                    type="file" 
-                    name="images" 
+
+                <input
+                    type="file"
+                    name="images"
                     id="imageUpload"
                     accept="image/*"
                     required
@@ -121,35 +234,91 @@
                 />
 
                 <label for="imageUpload">
-                    Click to Choose Image
+                    Click to Choose Images
                 </label>
 
-                <div class="file-name" id="fileName">
-                    No file selected
+                <div
+                    class="file-name"
+                    id="fileName"
+                >
+                    No files selected
                 </div>
+
             </div>
 
-            <button type="submit">Submit</button>
+            <div class="note">
+                Multiple image upload supported
+            </div>
+
+            <button type="submit">
+                Submit
+            </button>
+
         </form>
+
     </div>
 
     <script>
-        // Get request_id from URL
-        const params = new URLSearchParams(window.location.search);
-        document.getElementById("request_id").value =
+
+        /**
+         * Get request_id from URL
+         */
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        document.getElementById(
+            "request_id"
+        ).value =
             params.get("request_id");
 
-        // Show selected file name
-        const imageInput = document.getElementById("imageUpload");
-        const fileName = document.getElementById("fileName");
+        /**
+         * File display logic
+         */
+        const imageInput =
+            document.getElementById(
+                "imageUpload"
+            );
 
-        imageInput.addEventListener("change", function () {
-            if (this.files.length > 0) {
-                fileName.textContent = this.files[0].name;
-            } else {
-                fileName.textContent = "No file selected";
+        const fileName =
+            document.getElementById(
+                "fileName"
+            );
+
+        imageInput.addEventListener(
+            "change",
+
+            function () {
+
+                if (
+                    this.files.length > 0
+                ) {
+
+                    const names = [];
+
+                    for (
+                        let i = 0;
+                        i < this.files.length;
+                        i++
+                    ) {
+
+                        names.push(
+                            `${i + 1}. ${this.files[i].name}`
+                        );
+                    }
+
+                    fileName.innerHTML =
+                        names.join("<br>");
+
+                } else {
+
+                    fileName.textContent =
+                        "No files selected";
+                }
             }
-        });
+        );
+
     </script>
 
 </body>

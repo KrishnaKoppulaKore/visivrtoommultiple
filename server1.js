@@ -953,26 +953,177 @@ for (let i = 0; i < req.files.length; i++) {
       /**
        * Success HTML
        */
-      res.send(`
-        <html>
-          <body style="font-family: Arial; padding: 40px;">
+      // res.send(`
+      //   <html>
+      //     <body style="font-family: Arial; padding: 40px;">
             
-            <h2>
-              Form submitted successfully.
-            </h2>
+      //       <h2>
+      //         Form submitted successfully.
+      //       </h2>
 
-            <p>
-              ${req.files.length} image(s) analyzed successfully.
-            </p>
+      //       <p>
+      //         ${req.files.length} image(s) analyzed successfully.
+      //       </p>
 
-            <p>
-              You can now close this page.
-            </p>
+      //       <p>
+      //         You can now close this page.
+      //       </p>
 
-          </body>
-        </html>
-      `);
+      //     </body>
+      //   </html>
+      // `);
 
+      res.send(`
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Upload Successful</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+
+            height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #cc0000,
+                    #990000
+                );
+
+            padding: 20px;
+        }
+
+        .success-container {
+
+            width: 100%;
+            max-width: 450px;
+
+            background: white;
+
+            padding: 40px 30px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.25);
+        }
+
+        .logo {
+
+            width: 150px;
+
+            margin-bottom: 25px;
+        }
+
+        .checkmark {
+
+            font-size: 70px;
+
+            color: #16a34a;
+
+            margin-bottom: 20px;
+        }
+
+        h2 {
+
+            color: #111827;
+
+            margin-bottom: 15px;
+
+            font-size: 28px;
+        }
+
+        p {
+
+            color: #6b7280;
+
+            margin-bottom: 12px;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+        .count {
+
+            font-weight: bold;
+
+            color: #cc0000;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="success-container">
+
+        <img
+            src="https://demo.kore.ai/images/fileupload/fileupload/upload/toom9192cropped.jpg"
+            alt="Toom Logo"
+            class="logo"
+        />
+
+        <div class="checkmark">
+            ✓
+        </div>
+
+        <h2>
+            Upload Successful
+        </h2>
+
+        <p>
+            <span class="count">
+                ${req.files.length}
+            </span>
+
+            image(s) uploaded and analyzed successfully.
+        </p>
+
+        <p>
+            Your request has been processed successfully.
+        </p>
+
+        <p>
+            You may now close this page.
+        </p>
+
+    </div>
+
+</body>
+
+</html>
+
+`);
     } catch (err) {
 
       console.error(

@@ -477,7 +477,7 @@ app.post("/start", async (req, res) => {
         To: phone,
 
         Body:
-          `Please fill this form and upload plant images:\n${formLink}`,
+          `Bitte füllen Sie dieses Formular aus und laden Sie Bilder der Pflanzen hoch:\n${formLink}`,
       }),
 
       {

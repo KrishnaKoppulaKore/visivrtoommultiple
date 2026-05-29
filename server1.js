@@ -1098,7 +1098,7 @@ for (let i = 0; i < req.files.length; i++) {
         </div>
 
         <h2>
-            Upload Successful
+           Hochladen erfolgreich
         </h2>
 
         <p>
@@ -1106,15 +1106,15 @@ for (let i = 0; i < req.files.length; i++) {
                 ${req.files.length}
             </span>
 
-            image(s) uploaded and analyzed successfully.
+            Bild(er) erfolgreich hochgeladen und analysiert.
         </p>
 
         <p>
-            Your request has been processed successfully.
+           Ihre Anfrage wurde erfolgreich bearbeitet.
         </p>
 
         <p>
-            You may now close this page.
+           Sie können diese Seite nun schließen.
         </p>
 
     </div>
@@ -1122,7 +1122,6 @@ for (let i = 0; i < req.files.length; i++) {
 </body>
 
 </html>
-
 `);
     } catch (err) {
 
